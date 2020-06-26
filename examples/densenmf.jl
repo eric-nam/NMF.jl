@@ -1,5 +1,6 @@
 # NMF for dense matrices
 
+using Printf
 using NMF
 
 function run(algname)
@@ -9,8 +10,8 @@ function run(algname)
     k = 5
     n = 100
 
-    Wg = abs(randn(p, k))
-    Hg = abs(randn(k, n))
+    Wg = abs.(randn(p, k))
+    Hg = abs.(randn(k, n))
     X = Wg * Hg + 0.1 * randn(p, n)
 
     # run NNMF
@@ -19,7 +20,7 @@ function run(algname)
 
     r = nnmf(X, k; 
              init=:nndsvdar,
-             alg=symbol(algname), 
+             alg=Symbol(algname), 
              maxiter=30, 
              verbose=true)
 
